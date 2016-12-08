@@ -23,13 +23,18 @@ for models in models1:
                 repeats = 20
                 info_hv = [models.__name__ + " " + str(num_obj) + " " + str(num_dec) + " " + dom]
                 info_runs = [models.__name__ + " " + str(num_obj) + " " + str(num_dec) + " " + dom]
+		print info_hv
                 for x in range(repeats): #repeats
                     problem = MODEL(models, num_dec, num_obj, dom)
+		    print 'Model defined entering nsgaii'
 
                     #Evolution(problem, max_iterations, pop_size)
                     nsga = NSGAII(problem, 100, 100, dom)
 
                     hypervolume, runs = nsga.run()
+		    print 'Printing hypervolume'
+		    print hypervolume
+		    print runs
 
                     info_hv.append(hypervolume)
                     info_runs.append(runs)
@@ -37,6 +42,8 @@ for models in models1:
                     avg_runs += runs
                 hv_stats.append(info_hv)
                 run_stats.append(info_runs)
+		print info_hv
+		print info_runs
 
         sk(hv_stats)
         sk(run_stats)
